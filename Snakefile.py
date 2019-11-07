@@ -7,7 +7,7 @@ samples = pd.read_table("proteomes/proteome_names.txt")
 
 rule all:
 	input:
-		"proteomes/Proteomes_combined.fasta"
+		"proteomes/Proteomes_combined_map.pdb"
 
 rule combine_proteomes:
 	input:
@@ -17,4 +17,14 @@ rule combine_proteomes:
 	shell:
 		"""
 		cat {input} > {output}
+		"""
+		
+rule create_blastdb:
+	input:
+		"proteomes/Proteomes_combined.fasta"
+	output:
+		"proteomes/Proteomes_combined.pdb"
+	shell:
+		"""
+		makeblastdb -in {input} -parse_seqids -blastdb_version 5 -title "Tgondii proteomes" -dbtype prot
 		"""
