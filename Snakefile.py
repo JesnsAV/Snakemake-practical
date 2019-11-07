@@ -41,3 +41,13 @@ rule retrieve_fastas:
 		"""
 		wget ‐output-document={output} https://www.uniprot.org/uniprot/{wildcards.protein_name}.fasta
 		"""
+rule blastp:
+	input:
+		query = "proteins/{protein_name}.fasta"
+		database = "proteomes/Proteomes_combined.fasta"
+	output:
+		"hits/{protein_name}_blast.txt"
+	shell:
+		"""
+		blastp -query {input.query} -db {input.database} -out {output}
+		"""
