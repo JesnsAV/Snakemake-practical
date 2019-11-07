@@ -1,8 +1,3 @@
-import pandas as pd
-
-configfile: "config/config.yaml"
-
-samples = pd.read_csv("config/samples.tsv", sep="\t")
 
 rule all:
 	input:
