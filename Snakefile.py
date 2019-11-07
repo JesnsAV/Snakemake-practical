@@ -28,3 +28,16 @@ rule create_blastdb:
 		"""
 		makeblastdb -in {input} -parse_seqids -blastdb_version 5 -title "Tgondii proteomes" -dbtype prot
 		"""
+
+def protein_names(wc):
+	tbl = pd.read_table("resources/table")
+	f = expand("proteins/{protfile}", protfile = tbl.entry)
+	return(f)
+
+rule retrieve_fastas:
+	output:
+		"proteins/{protein_name}.fasta"
+	shell:
+		"""
+		wget ‐output-document={output} https://www.uniprot.org/uniprot/{wildcards.protein_name}.fasta
+		"""
