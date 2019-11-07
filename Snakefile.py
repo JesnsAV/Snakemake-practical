@@ -73,3 +73,15 @@ rule seq_groups:
 				seq = prot[row.loc[1]]
 				fastaout.write(f">{row.loc[1]}\n{seq}\n")
 
+
+rule alignments:
+	input:
+		"groups/{protein_name}_blastgroups.fa"
+	output:
+		"alignments/{protein_name}_blastgroups.aln"
+	conda:
+		"env/clustal.yml"
+	shell:
+		"""
+		clustalo -i {input} --seqtype=Protein -o {output}
+		"""
