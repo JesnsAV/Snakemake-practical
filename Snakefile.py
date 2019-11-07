@@ -6,17 +6,14 @@ samples = pd.read_csv("config/samples.tsv", sep="\t")
 
 rule all:
 	input:
-		expand("{results}/nuc_diversity.pdf",results=config["results"])
+		proteomes/Proteomes_combined.fasta
 
 rule combine_proteomes:
 	input:
-		ref="{data}/TB_ref.fa",
-		vcf="{data}/known_variants.vcf.gz"
+		proteomes/{proteome_name}.fasta
 	output:
-		directory("{data}/gramtools/build")
-	params:
-		#?
-	singularity:
-		config["?"]
+		proteomes/Proteomes_combined.fasta
 	shell:
-		#?
+		"""
+		echo {proteome_name}.fasta > Proteomes_combined.fasta
+		"""
