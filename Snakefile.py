@@ -7,7 +7,7 @@ samples = pd.read_table("proteomes/proteome_names.txt")
 
 rule all:
 	input:
-		"proteomes/Proteomes_combined_map.pdb"
+		"proteomes/Proteomes_combined.pdb"
 
 rule combine_proteomes:
 	input:
