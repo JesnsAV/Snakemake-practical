@@ -16,5 +16,5 @@ rule combine_proteomes:
 		"proteomes/Proteomes_combined.fasta"
 	shell:
 		"""
-		cat {wildcards.proteome_name}.fasta > Proteomes_combined.fasta
+		cat {input} > {output}
 		"""
